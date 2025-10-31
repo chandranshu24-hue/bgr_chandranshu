@@ -653,6 +653,30 @@ we can see the slope is increasing in case of multiple BJTs.
 
 #### PTAT Voltage generation with VCVS
 <img width="1668" height="801" alt="Screenshot 2025-10-30 121222" src="https://github.com/user-attachments/assets/450abfb4-5814-45b1-b4b2-369d50996ab0" />
+## 3.4.3 ⚙️ Resistance Temperature Coefficient (Tempco)
+
+### 🧠 Theory  
+- A resistor has a **positive temperature coefficient**, meaning its resistance increases as temperature increases.  
+- When a constant current (10 µA) flows through the resistor, the voltage across it is given by:
+
+  V_R = I × R(T)
+
+  where R(T) is the resistance that changes with temperature.  
+- As temperature rises, R(T) increases, so the voltage V_R also increases.  
+- Therefore, the voltage across the resistor behaves as a **PTAT voltage**.  
+- In a Bandgap Reference (BGR) circuit, this PTAT voltage adds to the thermal voltage from the BJT to cancel the CTAT behavior.
+
+  <img width="1594" height="669" alt="Screenshot 2025-10-31 153409" src="https://github.com/user-attachments/assets/62894e4b-dc09-4867-b6da-942f0fa2965e" />
+
+### 🖥️ Simulation Command
+```spice 
+cd /workspaces/vsd-bandgap/bandgap/prelayout/
+ngspice res_tempco.sp
+```
+
+
+
+---
 
 
 
