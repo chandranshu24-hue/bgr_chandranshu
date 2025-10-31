@@ -76,5 +76,43 @@ At its core, the Bandgap Reference circuit works as follows:
 5. [LVS and Post-Layout Simulation](#5-lvs-and-post-layout-simulation)
 
 ## 1. Tool and PDK Setup
+### 1.1 Tools Setup
+
+For the design, simulation, and verification of the Bandgap Reference (BGR) circuit, the following open-source EDA tools are used:
+
+---
+
+#### 🧪 Ngspice — Circuit Simulation
+**Ngspice** is an open-source SPICE-based simulator used for performing **analog circuit simulations**.  
+It takes a **SPICE netlist** as input, which describes the circuit components and their connections, and then computes electrical parameters such as node voltages, currents, and transfer characteristics.  
+In this project, Ngspice is used to:
+- Simulate the **schematic-level design** of the BGR circuit.  
+- Analyze **DC**, **AC**, and **transient** behavior.  
+- Verify **temperature dependence** and output voltage stability.
+<img width="289" height="123" alt="Screenshot 2025-10-31 101341" src="https://github.com/user-attachments/assets/f4615124-2ed7-4b6a-b25b-c889e7c5b86f" />
+
+---
+
+#### 🧩 Magic — Layout Design and DRC
+**Magic** is a VLSI layout editor developed by Berkeley, primarily used for **IC layout design** in open-source PDKs such as **Sky130**.  
+It provides interactive tools for drawing transistors, interconnects, and layers according to process design rules.  
+Magic is used here to:
+- Create the **physical layout** of the BGR circuit.  
+- Perform **Design Rule Check (DRC)** to ensure the layout complies with the fabrication constraints of the Sky130 process.  
+- Extract the layout to generate a **SPICE netlist** for post-layout simulations.
+<img width="274" height="111" alt="Screenshot 2025-10-31 101451" src="https://github.com/user-attachments/assets/a78093f7-4b13-406b-b854-ec6c8117bc11" />
+
+---
+
+#### 🔗 Netgen — LVS (Layout vs. Schematic)
+**Netgen** is a layout verification tool used for **Layout Versus Schematic (LVS)** comparison.  
+It compares the netlist extracted from the layout (using Magic) with the schematic netlist (used in Ngspice simulation) to verify connectivity and device matching.  
+A successful LVS ensures that the **layout accurately represents the schematic**, confirming the design’s electrical integrity before fabrication.
+
+---<img width="284" height="103" alt="Screenshot 2025-10-31 101535" src="https://github.com/user-attachments/assets/8f03273d-ce0b-4531-81f3-4f387b05238d" />
+
+
+In summary, these tools together provide a **complete open-source analog design flow** — from schematic simulation (Ngspice) → layout creation (Magic) → verification (Netgen).
+
 
 
