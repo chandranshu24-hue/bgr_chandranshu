@@ -29,7 +29,7 @@ By carefully scaling and summing these two voltages, the opposing temperature ef
 - Can be implemented using **bipolar or CMOS processes**
 - Widely used in **precision analog and mixed-signal ICs**
 
----
+
 
 ### 🧠 Working Principle (Simplified)
 At its core, the Bandgap Reference circuit works as follows:
@@ -293,8 +293,6 @@ The **Self-Biased Current Mirror Based Bandgap Reference (BGR)** circuit is comp
 The **Self-Biased Current Mirror** is a special type of current mirror that does **not require any external biasing source**.  
 Instead, it **automatically establishes its own bias current** through internal feedback, achieving a stable operating point without relying on an external reference.
 
----
-
 #### ⚙️ Working Principle
 
 In a self-biased current mirror, the **bias current** is generated internally by the circuit configuration itself.  
@@ -311,8 +309,6 @@ The **Reference Branch Circuit** is the core part of the Bandgap Reference (BGR)
 This branch typically consists of a **mirror transistor** and a **BJT configured as a diode**.  
 The mirror transistor ensures that the **same current** flowing through the current mirror branches also flows through the reference branch, maintaining bias symmetry across the circuit.
 
----
-
 #### ⚙️ Working Principle
 
 From the **PTAT generation circuit**, we obtain a **PTAT voltage** and a **PTAT current**.  
@@ -320,16 +316,14 @@ This PTAT current is mirrored into the reference branch, where it flows through 
 
 However, the **slope of the PTAT voltage** is much smaller compared to that of the **CTAT voltage**.  
 To balance these effects and achieve temperature independence, the **resistance value is increased** — since the current is constant, a higher resistance increases the voltage drop proportionally.
-
 As a result, the total output voltage across the resistor becomes the **sum of the PTAT and CTAT components**, yielding a **temperature-stable reference voltage**.
+
 <img width="168" height="487" alt="Screenshot 2025-10-31 122920" src="https://github.com/user-attachments/assets/77e86414-5d1f-42a8-8b0f-2a0c96c72d2b" />
 ---
 
 ### 2.3.5 Start-up Circuit
 
 The **Start-up Circuit** is an essential part of the Bandgap Reference (BGR) design that ensures the **self-biased current mirror** starts operating correctly from power-up.
-
----
 
 #### ⚙️ Function
 
@@ -343,6 +337,180 @@ This small perturbation shifts the mirror out of the zero-current equilibrium po
 Once the circuit begins to conduct, the **self-biasing mechanism** of the current mirror takes over and automatically stabilizes the current to its desired operating value.
 
 <img width="652" height="548" alt="Screenshot 2025-10-31 123141" src="https://github.com/user-attachments/assets/0367290b-ed4e-469e-bb0e-2898c3b3a790" />
+
+### 2.3.6 Complete BGR Circuit
+
+By combining all the previously discussed building blocks, we can construct the **Complete Bandgap Reference (BGR) Circuit**.
+
+---
+
+#### ⚙️ Circuit Composition
+
+The complete BGR circuit integrates the following components:
+
+1. **CTAT Voltage Generation Circuit** — provides a voltage that decreases with temperature using a BJT diode.  
+2. **PTAT Voltage Generation Circuit** — produces a voltage that increases with temperature using resistors and matched BJTs.  
+3. **Self-Biased Current Mirror Circuit** — establishes and maintains stable current levels without the need for external biasing.  
+4. **Reference Branch Circuit** — sums the CTAT and PTAT components to generate the temperature-independent reference voltage.  
+5. **Start-up Circuit** — ensures the self-biased current mirror starts correctly by eliminating the zero-current operating point.
+
+---
+
+#### 🧩 Working Principle
+
+- The **CTAT** and **PTAT** voltages are carefully scaled and summed to achieve a **temperature-stable output voltage**.  
+- The **current mirror** maintains proper biasing across all branches.  
+- The **start-up circuit** guarantees reliable operation from power-up.  
+
+Together, these components form a **fully functional Bandgap Reference circuit**, producing a **constant output voltage (~1.2 V)** that remains stable over variations in **temperature, supply voltage, and load conditions**.
+
+<img width="940" height="612" alt="Screenshot 2025-10-31 123818" src="https://github.com/user-attachments/assets/dc1935a4-7a6e-4256-a452-1da815851cf2" />
+
+#### ✅ Advantages of SBCM BGR
+
+- **Simplest Topology:** The circuit structure is straightforward, making it easy to implement.  
+- **Ease of Design:** Requires fewer components and has a simpler biasing mechanism compared to op-amp-based BGRs.  
+- **Always Stable:** The self-biasing mechanism ensures a stable operating point once the circuit starts.  
+
+#### ⚠️ Limitations of SBCM BGR
+
+- **Low Power Supply Rejection Ratio (PSRR):** More sensitive to supply voltage fluctuations.  
+- **Cascode Design Required:** A cascode structure may be added to improve PSRR performance.  
+- **Voltage Headroom Issue:** Limited voltage swing can affect proper operation in low-voltage designs.  
+- **Requires Start-up Circuit:** Essential to prevent the circuit from remaining in the zero-current state.
+
+## 3. Design and Pre-layout Simulation
+
+For the practical implementation of the Bandgap Reference (BGR) circuit, the **SkyWater SKY130 (130 nm)** PDK is used.  
+Before designing the complete circuit, we must first define the **design requirements** that our circuit should meet.
+
+---
+
+### 3.1 Design Requirements
+
+| Parameter | Specification |
+|------------|----------------|
+| Supply Voltage (VDD) | 1.8 V |
+| Temperature Range | -40°C to 125°C |
+| Power Consumption | < 60 µW |
+| Off Current | < 2 µA |
+| Start-up Time | < 2 µs |
+| Temperature Coefficient (Tempco) of Vref | < 50 ppm/°C |
+
+---
+
+### 3.2 Device Data Sheet
+
+#### 1. MOSFET
+
+| Parameter | NFET | PFET |
+|------------|-------|-------|
+| Type | LVT | LVT |
+| Voltage Rating | 1.8 V | 1.8 V |
+| Threshold Voltage (Vt0) | ~0.4 V | ~-0.6 V |
+| Model | sky130_fd_pr__nfet_01v8_lvt | sky130_fd_pr__pfet_01v8_lvt |
+
+---
+
+#### 2. Bipolar Junction Transistor (PNP)
+
+| Parameter | PNP |
+|------------|------|
+| Current Rating | 1 µA – 10 µA/µm² |
+| Beta (β) | ~12 |
+| Area | 11.56 µm² |
+| Model | sky130_fd_pr__pnp_05v5_W3p40L3p40 |
+
+---
+
+#### 3. Resistor (RPOLYH)
+
+| Parameter | RPOLYH |
+|------------|----------|
+| Sheet Resistance | ~350 Ω/sq |
+| Tempco | 2.5 Ω/°C |
+| Available Widths | 0.35 µm, 0.69 µm, 1.41 µm, 5.37 µm |
+| Model | sky130_fd_pr__res_high_po |
+
+---
+
+### 3.3 Circuit Design
+
+#### 1. Current Calculation
+
+Maximum Power Consumption = 60 µW  
+Supply Voltage = 1.8 V  
+
+Total Current = 60 µW / 1.8 V = 33.33 µA  
+
+Hence, 10 µA per branch is selected (3 × 10 = 30 µA)  
+Start-up current = 1–2 µA  
+
+---
+
+#### 2. Choosing Number of BJTs in Branch 2
+
+- Fewer BJTs → smaller resistance but poorer matching  
+- More BJTs → higher resistance but better matching  
+
+Chosen compromise: **8 BJTs** in parallel for good matching and moderate resistance.
+
+---
+
+#### 3. Calculation of R1
+
+R1 = (Vt × ln(8)) / I  
+R1 = (26 mV × ln(8)) / 10.7 µA ≈ 5 kΩ  
+
+R1 Size:  
+- W = 1.41 µm  
+- L = 7.8 µm  
+- Unit resistance = 2 kΩ  
+
+Resistor implementation: 2 in series and 2 in parallel (2 + 2 + (2‖2))
+
+---
+
+#### 4. Calculation of R2
+
+Current through reference branch:  
+I3 = I2 = (Vt × ln(8)) / R1  
+
+Voltage across R2:  
+VR2 = R2 × I3 = (R2 / R1) × (Vt × ln(8))  
+
+Slope of VR2 = (R2 / R1) × (ln(8) × 115 µV/°C)  
+Slope of VQ3 = -1.6 mV/°C  
+
+For zero temperature coefficient,  
+Total slope = 0 → R2 ≈ 33 kΩ  
+
+Resistor implementation: 16 in series and 2 in parallel (2 + 2 + … + 2 + (2‖2))
+
+---
+
+#### 5. Self-Biased Current Mirror (SBCM) Design
+
+##### A. PMOS Design (MP1, MP2)
+
+- Operate both transistors in saturation region.  
+- Increase channel length to reduce channel length modulation.  
+- Final size: L = 2 µm, W = 5 µm, M = 4  
+
+##### B. NMOS Design (MN1, MN2)
+
+- Operate both transistors either in saturation or deep subthreshold region.  
+- Here, they are designed to work in deep subthreshold region.  
+- Increase channel length to improve stability.  
+- Final size: L = 1 µm, W = 5 µm, M = 8  
+
+---
+
+📘 **Summary:**  
+The pre-layout circuit design is completed using the SKY130 PDK.  
+The design meets the target specifications for **low power**, **stable voltage reference**, and **temperature independence** while maintaining compatibility with the 130 nm CMOS process.
+
+
 
 
 
