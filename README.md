@@ -1071,6 +1071,40 @@ Hierarchy-1 (Basic Cells) : NFET, PFET, BJT, Resistor
 Hierarchy-2 (Blocks of similar cells): NFETS, PFETS, PNP10, RESBANK, STARTERNFET
 Hierarchy-3 (Top Level): TOP
 
+## 4.2 Blocks Design
+
+### 4.2.1 Design of NFETs
+
+We have designed the **NFET layout** by placing all the transistors in a single well-defined region to ensure proper matching and compactness.  
+The layout is carefully optimized to maintain **symmetry**, **matching accuracy**, and **noise immunity**.
+
+#### ⚙️ Design Details:
+1. **Common Centroid Matching:**  
+   - All NFETs are placed following the **common centroid** technique to minimize mismatch due to process gradients.  
+   - This helps in achieving balanced electrical characteristics across devices.
+
+2. **Dummy Devices:**  
+   - **Dummy transistors** are added at the edges of the active device array.  
+   - These prevent **diffusion edge effects** and ensure that active devices experience uniform process conditions.
+
+3. **Guard Ring:**  
+   - A **p+ guard ring** is added around the NFET array to protect the layout from substrate noise and improve device isolation.  
+   - It also helps in reducing latch-up susceptibility.
+
+4. **Diffusion Continuity:**  
+   - The layout ensures **no diffusion breaks**, which helps maintain low series resistance and better current matching.
+
+5. **Layout Orientation:**  
+   - All gates are oriented in the **same direction** for consistent channel stress.  
+   - Source and drain regions are shared between adjacent devices to reduce area and parasitics.
+
+``` bash
+@chandranshu24-hue ➜ /workspaces/vsd-bandgap/bandgap/layout (main) $ magic -T sky130A.tech  nfets.mag
+```
+<img width="1217" height="740" alt="Screenshot 2025-10-31 002351" src="https://github.com/user-attachments/assets/eecfadfc-acda-40c4-9be8-7af5c9211610" />
+
+
+
 
 
 
