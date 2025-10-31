@@ -148,3 +148,55 @@ Below are typical steps to obtain and prepare the SkyWater-130 PDK on a Linux de
 
 <img width="975" height="356" alt="Screenshot 2025-10-26 225127" src="https://github.com/user-attachments/assets/dd53a7e6-03a4-4d06-88a8-c8bf3c010cd1" />
 
+<img width="970" height="651" alt="Screenshot 2025-10-26 230151" src="https://github.com/user-attachments/assets/2b2cb94a-b2ef-4135-8f42-42a58acddaf4" />
+
+## 2. BGR Introduction
+
+### 2.1 BGR Principle
+
+The **Bandgap Reference (BGR)** circuit generates a temperature-independent reference voltage by combining two voltage components with **opposite temperature coefficients**.
+
+The basic operation principle of a BGR circuit is to **sum a voltage with a negative temperature coefficient (CTAT)** and another with a **positive temperature coefficient (PTAT)** such that their variations cancel each other.
+
+---
+
+#### 🧩 Key Concepts
+
+- **CTAT (Complementary to Absolute Temperature):**  
+  A voltage that **decreases** as temperature **increases**.  
+  Typically, the **base-emitter voltage (V<sub>BE</sub>)** of a bipolar junction transistor (BJT) or a diode exhibits CTAT behavior.
+
+- **PTAT (Proportional to Absolute Temperature):**  
+  A voltage that **increases** as temperature **increases**.  
+  This can be generated using the **difference between two V<sub>BE</sub>** voltages of transistors operating at different current densities.
+
+---
+
+#### ⚙️ Principle of Operation
+
+The BGR circuit operates by **adding** the CTAT and PTAT voltages in proper proportion so that the resulting voltage remains constant over temperature.
+
+\[
+V_{REF} = V_{BE} + K \cdot (V_{T} \ln N)
+\]
+
+Where:
+- \( V_{BE} \) → CTAT voltage (decreases with temperature)  
+- \( V_{T} = \frac{kT}{q} \) → Thermal voltage (proportional to temperature)  
+- \( \ln N \) → Logarithmic factor based on transistor area ratio  
+- \( K \) → Scaling constant to balance CTAT and PTAT components  
+
+---
+
+#### 🧠 Summary
+
+- **Diode / BJT junction** provides the **CTAT** component.  
+- **Difference in V<sub>BE</sub>** between transistors provides the **PTAT** component.  
+- When both are combined properly, the **temperature variations cancel**, producing a **constant reference voltage (~1.2 V)** close to the **bandgap voltage of silicon**.
+
+---
+
+📘 *In simple terms, the BGR circuit uses one voltage that decreases with temperature and another that increases with temperature — when added in the right ratio, the overall result stays constant.*
+
+
+
