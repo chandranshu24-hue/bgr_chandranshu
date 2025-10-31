@@ -635,6 +635,29 @@ After simulation we can get a wavefrom like below, and from the wavefrom we can 
 
 <img width="911" height="659" alt="Screenshot 2025-10-29 170822" src="https://github.com/user-attachments/assets/eaf920cc-0284-4cbc-ac74-c9c0dd8ae2f8" />
 
+<img width="926" height="589" alt="Screenshot 2025-10-29 172431" src="https://github.com/user-attachments/assets/e4defc35-d568-459d-b876-5e8c0d4509ba" />
+
+### CTAT Voltage generation with Multiple BJT netlist
+
+In this simulation we will check the CTAT voltage across the 8 parallel connected BJTs
+<img width="981" height="492" alt="Screenshot 2025-10-31 152650" src="https://github.com/user-attachments/assets/015da634-c3b7-43ae-9685-58a3b8af7e95" />
+
+<img width="1171" height="761" alt="Screenshot 2025-10-31 152525" src="https://github.com/user-attachments/assets/6dfb5edd-e29b-4de2-91f1-3f8e83a1ed72" />
+
+we can see the slope is increasing in case of multiple BJTs.
+
+### CTAT Voltage generation with different current source values netlist
+<img width="945" height="737" alt="Screenshot 2025-10-29 173850" src="https://github.com/user-attachments/assets/5aa8fa5b-4063-4cc9-a154-9024c2f36fb9" />
+
+### 3.4.2  PTAT Simulation
+
+#### PTAT Voltage generation with VCVS
+<img width="1668" height="801" alt="Screenshot 2025-10-30 121222" src="https://github.com/user-attachments/assets/450abfb4-5814-45b1-b4b2-369d50996ab0" />
+
+
+
+
+
 
 
 
