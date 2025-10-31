@@ -262,6 +262,90 @@ Depending on design goals and target specifications, BGR circuits can be categor
 In this project, we implement the **Bandgap Reference (BGR)** circuit using a **Self-Biased Current Mirror Architecture**,  
 as it provides a good balance between **simplicity**, **power efficiency**, and **temperature stability** for integrated circuit applications.
 
+### 2.3 Self-Biased Current Mirror Based BGR
+The **Self-Biased Current Mirror Based Bandgap Reference (BGR)** circuit is composed of several functional sub-blocks that together generate a stable, temperature-independent reference voltage.
+
+---
+
+#### 🧩 Main Components
+
+1. **CTAT Voltage Generation Circuit**  
+   Produces a voltage that decreases with increasing temperature.
+
+2. **PTAT Voltage Generation Circuit**  
+   Produces a voltage that increases with temperature.
+
+3. **Self-Biased Current Mirror Circuit**  
+   Establishes a stable bias current without relying on an external source.
+
+4. **Reference Branch Circuit**  
+   Combines the PTAT and CTAT voltages to generate a constant reference voltage.
+
+5. **Start-Up Circuit**  
+### 2.3.1 CTAT Voltage Generation Circuit
+<img width="222" height="292" alt="Screenshot 2025-10-31 120511" src="https://github.com/user-attachments/assets/f81c739d-d139-4442-9e03-85e1de35a908" />
+
+### 2.3.2 PTAT Voltage Generation Circuit
+<img width="487" height="488" alt="Screenshot 2025-10-31 120612" src="https://github.com/user-attachments/assets/03a0037b-3e24-4529-837d-b01bb89097ca" />
+
+### 2.3.3 Self-Biased Current Mirror Circuit
+
+The **Self-Biased Current Mirror** is a special type of current mirror that does **not require any external biasing source**.  
+Instead, it **automatically establishes its own bias current** through internal feedback, achieving a stable operating point without relying on an external reference.
+
+---
+
+#### ⚙️ Working Principle
+
+In a self-biased current mirror, the **bias current** is generated internally by the circuit configuration itself.  
+This is typically achieved using **transistor feedback loops**, where one branch sets the reference voltage or current, and the mirror branch replicates it.
+
+The circuit adjusts itself until the **voltages and currents stabilize** at a desired value — a state known as **self-biasing equilibrium**.  
+This eliminates the need for an external current reference, making the design **compact, power-efficient, and self-sufficient**.
+<img width="447" height="376" alt="Screenshot 2025-10-31 120810" src="https://github.com/user-attachments/assets/1d49e411-6297-44c1-a7b0-9ba2fd790ab9" />
+---
+### 2.3.4 Reference Branch Circuit
+
+The **Reference Branch Circuit** is the core part of the Bandgap Reference (BGR) that performs the **addition of CTAT and PTAT voltages** to produce the final **constant reference voltage**.
+
+This branch typically consists of a **mirror transistor** and a **BJT configured as a diode**.  
+The mirror transistor ensures that the **same current** flowing through the current mirror branches also flows through the reference branch, maintaining bias symmetry across the circuit.
+
+---
+
+#### ⚙️ Working Principle
+
+From the **PTAT generation circuit**, we obtain a **PTAT voltage** and a **PTAT current**.  
+This PTAT current is mirrored into the reference branch, where it flows through a **resistor** connected in series with the **CTAT diode**.
+
+However, the **slope of the PTAT voltage** is much smaller compared to that of the **CTAT voltage**.  
+To balance these effects and achieve temperature independence, the **resistance value is increased** — since the current is constant, a higher resistance increases the voltage drop proportionally.
+
+As a result, the total output voltage across the resistor becomes the **sum of the PTAT and CTAT components**, yielding a **temperature-stable reference voltage**.
+<img width="168" height="487" alt="Screenshot 2025-10-31 122920" src="https://github.com/user-attachments/assets/77e86414-5d1f-42a8-8b0f-2a0c96c72d2b" />
+---
+
+### 2.3.5 Start-up Circuit
+
+The **Start-up Circuit** is an essential part of the Bandgap Reference (BGR) design that ensures the **self-biased current mirror** starts operating correctly from power-up.
+
+---
+
+#### ⚙️ Function
+
+In self-biased current mirrors, there exists a **degenerative bias point** where the circuit can settle into an **unwanted zero-current state**.  
+Without intervention, the mirror could remain in this state indefinitely, preventing the circuit from reaching its intended operating condition.
+
+To avoid this, a **start-up circuit** is introduced.  
+This circuit **forces a small initial current** into the self-biased current mirror when it detects that the mirror current is zero.  
+This small perturbation shifts the mirror out of the zero-current equilibrium point.
+
+Once the circuit begins to conduct, the **self-biasing mechanism** of the current mirror takes over and automatically stabilizes the current to its desired operating value.
+
+<img width="652" height="548" alt="Screenshot 2025-10-31 123141" src="https://github.com/user-attachments/assets/0367290b-ed4e-469e-bb0e-2898c3b3a790" />
+
+
+
 
 
 
