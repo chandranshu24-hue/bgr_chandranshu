@@ -539,7 +539,7 @@ Output nodes: ra1 and gnd
 gain=1000 → Output voltage = 1000 × (V(qp1) - V(net2))
 
 Used for amplification or feedback control in analog reference circuits.
-3️⃣ MOSFET Definition (PMOS Devices)
+### 3️⃣ MOSFET Definition (PMOS Devices)
 ```spice
 *** mosfet definition
 xmp1 q1 net2 vdd vdd sky130_fd_pr__pfet_01v8_lvt l=2 w=5 m=4
@@ -561,7 +561,7 @@ m=4 → 4 parallel transistors for higher drive strength and better matching.
 
 Both transistors share the same gate (net2) to form a current mirror or load pair.
 
-4️⃣ Resistor Definition
+### 4️⃣ Resistor Definition
 ```spice
 **resistor definition
 xra ra1 qp2 gnd sky130_fd_pr__res_high_po_1p41 l=30
@@ -576,7 +576,7 @@ Parameter: l=30 → Resistor length = 30µm (resistance ∝ length).
 
 Used to generate voltage drops or temperature-dependent resistances in the circuit.
 
-5️⃣ BJT (PNP Transistor) Definition
+ ### 5️⃣ BJT (PNP Transistor) Definition
 ```spice
 **bjt definition
 xqp1 gnd gnd qp1 gnd sky130_fd_pr__pnp_05v5_w3p40l3p40 m=1
@@ -596,7 +596,7 @@ m=8 → 8 parallel BJTs (used to adjust emitter area and current density).
 
 Increasing m improves matching and modifies Vbe slope for temperature compensation.
 
-6️⃣ Vim Command
+ ### 6️⃣ Vim Command
 ```spice
 :wq
 ```
