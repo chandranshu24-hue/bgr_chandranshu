@@ -1006,6 +1006,75 @@ plot vid1#branch vid2#branch vid3#branch vid4#branch vid5#branch
 <img width="843" height="706" alt="Screenshot 2025-10-30 150017" src="https://github.com/user-attachments/assets/9394d754-b91d-4c96-92a2-56527d8950fe" />
 Tempco. Of Vref = ~45 PPM
 
+## 4. Layout Design
+
+Now after getting our final **netlist**, we have to design the **layout** for our **Bandgap Reference (BGR)** circuit.  
+Layout is the graphical representation of the physical masks used in **IC fabrication**.  
+We are going to use the **Magic VLSI tool** for our layout design.
+
+---
+
+### 4.1 Getting Started with Magic
+
+**Magic** is an open-source **VLSI layout editor** used to design, edit, and verify integrated circuit layouts.
+
+#### 🧭 To launch Magic, open your terminal and run the following command:
+
+<img width="947" height="387" alt="Screenshot 2025-10-31 181207" src="https://github.com/user-attachments/assets/6cd24eb2-8089-404f-82d8-780a6b3eea2a" />
+
+Now it will open up two windows, those are tkcon.tcl and toplevel. Now let's discuss some basic magic tool operations.
+```bash
+g : grid on/off
+z : zoom in
+Shift + z : zoom out
+
+Draw a box : 
+  1. Left click + Right click of the mouse : pointer will be at a grid point
+  2. Right click : a blank box will be created from the pointed point to the point where right click occured
+ 
+Fill a box with a layer:
+  1. Draw a box
+  2. Select a layer from the tool manager
+  3. Middle click the mouse button
+  
+  or 
+  
+  1. Draw a box
+  2. Write "paint <layer name>" in the tkcon.tcl window
+
+
+Delete a layer:
+  1. Draw a box where you want to delete a layer
+  2. Write "erase <layer name>" in the tkcon.tcl window
+ 
+Delete an area:
+  1. Draw a box where you want to delete an area
+  2. Press 'a'
+  3. Press 'd'
+
+u : undo
+r : rotate
+m : move
+c : copy
+```
+Now device wise we have the following devices in our circuit.
+
+PFETS
+NFETS
+Resistor Bank
+BJTs
+Now in order to design faster we should follow the hierarchical design manner. i.e we will design one cell then we will instance that to another level and do placement and routing.
+
+In our design we have 3 hierarchies. Those are
+
+Hierarchy-1 (Basic Cells) : NFET, PFET, BJT, Resistor
+Hierarchy-2 (Blocks of similar cells): NFETS, PFETS, PNP10, RESBANK, STARTERNFET
+Hierarchy-3 (Top Level): TOP
+
+
+
+
+
 
 
 
