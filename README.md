@@ -158,6 +158,8 @@ The **Bandgap Reference (BGR)** circuit generates a temperature-independent refe
 
 The basic operation principle of a BGR circuit is to **sum a voltage with a negative temperature coefficient (CTAT)** and another with a **positive temperature coefficient (PTAT)** such that their variations cancel each other.
 
+<img width="937" height="571" alt="Screenshot 2025-10-31 114203" src="https://github.com/user-attachments/assets/fd8e82f0-ac14-4d01-8c6c-c3544f9b369a" />
+
 ---
 
 #### 🧩 Key Concepts
@@ -165,6 +167,7 @@ The basic operation principle of a BGR circuit is to **sum a voltage with a nega
 - **CTAT (Complementary to Absolute Temperature):**  
   A voltage that **decreases** as temperature **increases**.  
   Typically, the **base-emitter voltage (V<sub>BE</sub>)** of a bipolar junction transistor (BJT) or a diode exhibits CTAT behavior.
+  
 
 - **PTAT (Proportional to Absolute Temperature):**  
   A voltage that **increases** as temperature **increases**.  
@@ -175,18 +178,25 @@ The basic operation principle of a BGR circuit is to **sum a voltage with a nega
 #### ⚙️ Principle of Operation
 
 The BGR circuit operates by **adding** the CTAT and PTAT voltages in proper proportion so that the resulting voltage remains constant over temperature.
+####  2.1.1 CTAT VOLTAGE GENERATION
+Semiconductor diodes typically exhibit CTAT (Complementary to Absolute Temperature) behavior. When a constant current flows through a forward-biased diode, an increase in temperature causes the voltage across the diode to decrease. Experimentally, the rate of decrease of the diode’s forward voltage with temperature is approximately –2 mV/°C.
+<img width="825" height="295" alt="Screenshot 2025-10-31 114812" src="https://github.com/user-attachments/assets/37ece2d7-02f6-4462-9eb4-e0d2c31d0e94" />
 
-\[
-V_{REF} = V_{BE} + K \cdot (V_{T} \ln N)
-\]
+####  2.1.2 PTAT VOLTAGE GENERATION
+<img width="328" height="627" alt="Screenshot 2025-10-31 115134" src="https://github.com/user-attachments/assets/cde662c9-566f-4728-8542-b3e8e4a2aec4" />
 
-Where:
-- \( V_{BE} \) → CTAT voltage (decreases with temperature)  
-- \( V_{T} = \frac{kT}{q} \) → Thermal voltage (proportional to temperature)  
-- \( \ln N \) → Logarithmic factor based on transistor area ratio  
-- \( K \) → Scaling constant to balance CTAT and PTAT components  
+From the diode current equation, it can be observed that the diode voltage consists of two main temperature-dependent components:
 
----
+Thermal voltage (Vₜ) — This term is directly proportional to temperature (approximately of order ~1).
+
+Reverse saturation current (Iₛ) — This term increases with temperature approximately with an order of ~2.5.
+
+Since Iₛ appears in the denominator of the logarithmic term (ln(I₀/Iₛ)), an increase in temperature causes this term to decrease, resulting in the CTAT behavior of the diode voltage.
+
+Therefore, to design a PTAT (Proportional to Absolute Temperature) voltage generation circuit, we need a method to isolate the Vₜ component from the Iₛ dependence.
+
+The following approach describes how this separation can be achieved.
+
 
 #### 🧠 Summary
 
