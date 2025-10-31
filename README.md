@@ -603,10 +603,42 @@ Increasing m improves matching and modifies Vbe slope for temperature compensati
 Saves (:w) and quits (:q) the file in Vim or GVim editor after writing the netlist.
 
 
-
-
-
 <img width="953" height="692" alt="Screenshot 2025-10-31 145732" src="https://github.com/user-attachments/assets/d3cd580a-22dc-4739-8d41-5de36279e459" />
+
+## 3.4.1 ⚙️ CTAT Simulation  
+### CTAT Voltage Generation with Single BJT Netlist
+
+#### 🧠 Theory  
+- A **BJT used as a diode** (by shorting its base and collector) produces a voltage that **decreases linearly with temperature**.  
+- When a **constant current source (10 µA)** flows through the BJT, the **base-emitter voltage (V_BE)** shows a **negative temperature coefficient** (typically −2 mV/°C).  
+- This negative slope of **V_BE vs. Temperature** represents the **CTAT characteristic**.
+
+#### ⚡ Circuit Setup  
+- **Device Used:** `sky130_fd_pr__pnp_05v5_w3p40l3p40`  
+- **Bias Current:** 10 µA (constant current source)  
+- **Output Measured:** Voltage across BJT (V_BE)   
+
+#### 🧾 Expected Output  
+A **straight line with a negative slope** in the **V_BE vs. Temperature** plot:  
+> As temperature increases → V_BE decreases → CTAT behavior confirmed ✅  
+
+#### 🖥️ Simulation Command  
+Open your terminal and navigate to the **prelayout** directory.  
+Run the following command to launch the simulation:
+
+```bash
+cd /workspaces/vsd-bandgap/bandgap/prelayout/
+ngspice ctat_voltage_gen.sp
+```
+
+After simulation we can get a wavefrom like below, and from the wavefrom we can see the CTAT behaviour of the BJT, and can find the slope.
+
+<img width="911" height="659" alt="Screenshot 2025-10-29 170822" src="https://github.com/user-attachments/assets/eaf920cc-0284-4cbc-ac74-c9c0dd8ae2f8" />
+
+
+
+
+
 
 
 
