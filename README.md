@@ -84,12 +84,12 @@ For the design, simulation, and verification of the Bandgap Reference (BGR) circ
 
 #### 🧪 Ngspice — Circuit Simulation
 **Ngspice** is an open-source SPICE-based simulator used for performing **analog circuit simulations**.  
+<img width="289" height="123" alt="Screenshot 2025-10-31 101341" src="https://github.com/user-attachments/assets/f4615124-2ed7-4b6a-b25b-c889e7c5b86f" />
 It takes a **SPICE netlist** as input, which describes the circuit components and their connections, and then computes electrical parameters such as node voltages, currents, and transfer characteristics.  
 In this project, Ngspice is used to:
 - Simulate the **schematic-level design** of the BGR circuit.  
 - Analyze **DC**, **AC**, and **transient** behavior.  
 - Verify **temperature dependence** and output voltage stability.
-<img width="289" height="123" alt="Screenshot 2025-10-31 101341" src="https://github.com/user-attachments/assets/f4615124-2ed7-4b6a-b25b-c889e7c5b86f" />
 Steps to install Ngspice - Open the terminal and type the following to install Ngspice
 ```bash
 $  sudo apt-get install ngspice
