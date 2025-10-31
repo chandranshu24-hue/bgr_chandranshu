@@ -139,12 +139,12 @@ In summary, these tools together provide a **complete open-source analog design 
 
 The SkyWater **sky130** PDK provides process design data (layers, device rules, models) required for layout, extraction and simulation.  
 Below are typical steps to obtain and prepare the SkyWater-130 PDK on a Linux development environment.
-
--Create a directory for the PDK
--Clone the SkyWater PDK repository
--Initialize submodules (if required)
--Build or install PDK libraries (optional)
--Set the PDK path so tools like Magic, Ngspice, and Netgen can locate it easily.
+**Steps:**
+- Create a directory for the PDK.  
+- Clone the SkyWater PDK repository.  
+- Initialize submodules (if required).  
+- Build or install PDK libraries (optional).  
+- Set the PDK path so tools like Magic, Ngspice, and Netgen can locate it easily. 
 
 <img width="975" height="356" alt="Screenshot 2025-10-26 225127" src="https://github.com/user-attachments/assets/dd53a7e6-03a4-4d06-88a8-c8bf3c010cd1" />
 
