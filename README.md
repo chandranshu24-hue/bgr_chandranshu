@@ -1193,6 +1193,7 @@ The image below shows the **complete top-level BGR layout**, where all component
 <img width="1145" height="452" alt="Screenshot 2025-10-31 004007" src="https://github.com/user-attachments/assets/2ef1452c-77cc-42d6-a90c-89f782e5b1d0" />
 <img width="942" height="705" alt="Screenshot 2025-10-31 004154" src="https://github.com/user-attachments/assets/ab5dfb95-d7f3-47c6-8e0f-69409b696b6d" />
 
+### AUTHOR- CHANDRANSHU DAS UNDER GUIDANCE OF Prof. Santunu Sarangi in collaboration with VSD
 
 
 
