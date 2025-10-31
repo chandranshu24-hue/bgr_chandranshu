@@ -540,6 +540,56 @@ gain=1000 → Output voltage = 1000 × (V(qp1) - V(net2))
 
 Used for amplification or feedback control in analog reference circuits.
 
+*** mosfet definition
+xmp1 q1 net2 vdd vdd sky130_fd_pr__pfet_01v8_lvt l=2 w=5 m=4
+xmp2 q2 net2 vdd vdd sky130_fd_pr__pfet_01v8_lvt l=2 w=5 m=4
+xmp1, xmp2 are PMOS transistors used in bias or mirror configurations.
+
+Model: sky130_fd_pr__pfet_01v8_lvt → 1.8V Low-Threshold PMOS (from Sky130 PDK).
+
+Node order: Drain → Gate → Source → Bulk
+
+Parameters:
+
+l=2 → Channel Length = 2µm
+
+w=5 → Channel Width = 5µm
+
+m=4 → 4 parallel transistors for higher drive strength and better matching.
+
+Both transistors share the same gate (net2) to form a current mirror or load pair.
+
+**resistor definition
+xra ra1 qp2 gnd sky130_fd_pr__res_high_po_1p41 l=30
+xra defines a high-poly resistor using Sky130 PDK.
+
+Model: sky130_fd_pr__res_high_po_1p41 → High-Resistivity Polysilicon Resistor.
+
+Nodes: Between ra1 and qp2, connected to gnd.
+
+Parameter: l=30 → Resistor length = 30µm (resistance ∝ length).
+
+Used to generate voltage drops or temperature-dependent resistances in the circuit.
+**bjt definition
+xqp1 gnd gnd qp1 gnd sky130_fd_pr__pnp_05v5_w3p40l3p40 m=1
+xqp2 gnd gnd qp2 gnd sky130_fd_pr__pnp_05v5_w3p40l3p40 m=8
+xqp1, xqp2 are PNP BJTs used for CTAT and PTAT voltage generation.
+
+Model: sky130_fd_pr__pnp_05v5_w3p40l3p40 → 5V PNP transistor from SkyWater PDK.
+
+Node order: Collector → Base → Emitter → Substrate
+
+Parameters:
+
+m=1 → Single transistor (for base reference branch).
+
+m=8 → 8 parallel BJTs (used to adjust emitter area and current density).
+
+Increasing m improves matching and modifies Vbe slope for temperature compensation.
+
+
+
+
 
 <img width="953" height="692" alt="Screenshot 2025-10-31 145732" src="https://github.com/user-attachments/assets/d3cd580a-22dc-4739-8d41-5de36279e459" />
 
