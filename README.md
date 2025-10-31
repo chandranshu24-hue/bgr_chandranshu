@@ -197,6 +197,22 @@ Therefore, to design a PTAT (Proportional to Absolute Temperature) voltage gener
 
 The following approach describes how this separation can be achieved.
 
+<img width="452" height="412" alt="Screenshot 2025-10-31 115401" src="https://github.com/user-attachments/assets/d22c07fa-9154-4592-a5df-ccbc76e92de8" />
+
+In the above circuit same amount of current I is flowing in both the branches. So the node voltage A and B are going to be same V. Now in the B branch if we substract V1 from V, we get Vt independent of Is.
+
+<img width="640" height="383" alt="Screenshot 2025-10-31 115505" src="https://github.com/user-attachments/assets/8257068f-df17-4cad-b717-eaf2363d28c0" />
+
+V= Combined Voltage across R1 and Q2 (CTAT in nature but less sloppy)
+V1= Voltage across Q2 (CTAT in nature but more sloppy)
+V-V1= Voltage across R1 (PTAT in nature)
+
+From the above analysis, it is evident that the voltage difference (V – V₁) exhibits a PTAT (Proportional to Absolute Temperature) behavior. However, its slope is relatively small compared to the CTAT (Complementary to Absolute Temperature) characteristic of a diode.
+
+To enhance the PTAT slope, multiple BJTs configured as diodes can be used in parallel. This reduces the current flowing through each individual diode, which in turn increases the slope of the (V – V₁) characteristic, thereby improving the PTAT response.
+<img width="1002" height="507" alt="Screenshot 2025-10-31 115754" src="https://github.com/user-attachments/assets/d3e2de54-c961-4d9c-a93e-421788587f0b" />
+
+
 
 #### 🧠 Summary
 
@@ -207,6 +223,45 @@ The following approach describes how this separation can be achieved.
 ---
 
 📘 *In simple terms, the BGR circuit uses one voltage that decreases with temperature and another that increases with temperature — when added in the right ratio, the overall result stays constant.*
+
+### 2.2 Types of Bandgap Reference (BGR)
+
+The **Bandgap Reference (BGR)** circuit can be classified in different ways depending on its **circuit architecture** and **application requirements**.
+
+---
+
+#### 🧩 Architecture-wise Classification
+
+Based on the circuit implementation approach, BGR circuits are commonly designed using:
+
+1. **Self-Biased Current Mirror Architecture**  
+   - Uses transistor-level biasing without external amplifiers.  
+   - Offers simplicity and good stability.  
+   - Suitable for integration in analog and mixed-signal ICs.
+
+2. **Operational Amplifier-Based Architecture**  
+   - Uses an op-amp to control node voltages precisely.  
+   - Provides better accuracy and matching.  
+   - Often used in precision reference applications.
+
+---
+
+#### ⚙️ Application-wise Classification
+
+Depending on design goals and target specifications, BGR circuits can be categorized as:
+
+1. **Low-Voltage BGR** — Optimized to operate at reduced supply voltages.  
+2. **Low-Power BGR** — Designed for minimal power consumption, suitable for battery-powered systems.  
+3. **High-PSRR and Low-Noise BGR** — Provides improved noise performance and power supply rejection ratio.  
+4. **Curvature-Compensated BGR** — Includes additional circuitry to minimize second-order temperature effects.
+
+---
+
+#### 🧠 Our Design Choice
+
+In this project, we implement the **Bandgap Reference (BGR)** circuit using a **Self-Biased Current Mirror Architecture**,  
+as it provides a good balance between **simplicity**, **power efficiency**, and **temperature stability** for integrated circuit applications.
+
 
 
 
