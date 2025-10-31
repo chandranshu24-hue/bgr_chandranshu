@@ -1103,6 +1103,100 @@ The layout is carefully optimized to maintain **symmetry**, **matching accuracy*
 ```
 <img width="1217" height="740" alt="Screenshot 2025-10-31 002351" src="https://github.com/user-attachments/assets/eecfadfc-acda-40c4-9be8-7af5c9211610" />
 
+### 4.2.2 Design of PFETs
+
+We have designed the **PFET layout block** by grouping all PFETs together in a symmetric and well-matched arrangement.  
+The layout emphasizes **device matching**, **isolation**, and **robustness against noise** to ensure accurate current mirroring and stable biasing.
+
+#### ⚙️ Design Details:
+1. **Matching Arrangement:**  
+   - All PFETs are placed in a **symmetrical array** using a **common centroid pattern** to reduce gradient-induced mismatches.  
+   - Ensures that variations in oxide thickness or dopant concentration are evenly distributed across all devices.
+
+2. **Dummy Transistors:**  
+   - **Dummy PFETs** are added at the edges of the active device array.  
+   - These dummies improve **process uniformity** and minimize edge effects in the active transistors.
+
+3. **Guard Ring Implementation:**  
+   - A **n+ guard ring** is placed around the PFET block to protect it from substrate noise and potential coupling from nearby circuits.  
+   - It provides better **isolation** and enhances overall layout reliability.
+
+4. **Shared Source/Drain Regions:**  
+   - Adjacent transistors share common diffusion areas to minimize parasitic resistance and save layout area.
+
+5. **Orientation Consistency:**  
+   - All gates are aligned in the same direction for uniform channel characteristics and ease of routing.
+
+<img width="1236" height="667" alt="Screenshot 2025-10-31 002058" src="https://github.com/user-attachments/assets/01a4db12-5f16-4f17-95ee-1536df0de05f" />
+
+### 4.2.3 Design of RESBANK
+<img width="1182" height="752" alt="Screenshot 2025-10-31 001816" src="https://github.com/user-attachments/assets/949707f0-c7f4-48fe-9b7b-95fca120175d" />
+
+### 4.2.4 Design of PNP10
+We have created the layout by putting all the PNPs together, with appropriate matching, and used dummies to enhance noise performance.
+<img width="1196" height="690" alt="Screenshot 2025-10-31 003055" src="https://github.com/user-attachments/assets/e20f8fd8-f41c-48ee-bada-b260c337d161" />
+
+### 4.2.5 Design of STARTERNFET
+We placed the the two w=1, l=7 NFETs together with a guardring to desingn the STATRTERNFET.
+<img width="962" height="315" alt="Screenshot 2025-10-31 182922" src="https://github.com/user-attachments/assets/646c5788-3ab0-45b7-9525-07e40c1bd7e6" />
+
+### 4.4 TOP LEVEL DESIGN
+The **top-level layout** integrates all the sub-blocks of the Bandgap Reference (BGR) circuit — including NFETs, PFETs, resistor bank, BJT, and the startup circuit — into a single unified layout using **Magic VLSI**.
+
+#### 🧩 Layout Overview:
+The layout is organized for optimal matching, symmetry, and noise immunity. Each functional block is carefully placed to minimize parasitic effects and ensure consistent temperature behavior.
+
+#### ⚙️ Key Components:
+1. **NFET Block (Bottom Section):**
+   - Contains all NMOS transistors arranged in a **common centroid** configuration.
+   - Includes dummy devices and a guard ring for isolation and matching.
+   - Used primarily in the current mirror and startup circuit.
+
+2. **PFET Block (Middle Section):**
+   - PFETs are placed symmetrically to ensure equal current distribution.
+   - Guard ring provided to suppress substrate coupling noise.
+   - Used in the mirror and biasing circuits.
+
+3. **Resistor Bank (Top Section):**
+   - Houses all resistors in a matched array configuration.
+   - Edge dummies used to avoid process variations.
+   - Provides PTAT and CTAT voltage scaling.
+
+4. **BJT Block:**
+   - Diode-connected BJT for CTAT voltage generation.
+   - Placed close to the resistor bank to ensure uniform temperature tracking.
+
+5. **Startup Circuit (Center):**
+   - Labeled as **starternfet** in the layout.
+   - Ensures proper startup of the self-biased current mirror.
+   - Connected to NFET region for bias initialization.
+
+6. **Guard Rings and Isolation:**
+   - Full perimeter **p+ guard ring** implemented for substrate noise isolation.
+   - Ensures reliable and low-noise reference operation.
+
+#### 🧾 Layout Details:
+| Parameter | Value / Description |
+|------------|---------------------|
+| Tool Used | Magic VLSI |
+| Technology | SkyWater SKY130 |
+| DRC Status | Clean (No Design Rule Errors) |
+| File Name | `bgr_top.mag` |
+| Layout Dimensions | ~85 µm × 73 µm |
+
+#### 🖼️ Layout Visualization:
+The image below shows the **complete top-level BGR layout**, where all components are interconnected and verified for DRC cleanliness.
+<img width="1163" height="774" alt="Screenshot 2025-10-31 003200" src="https://github.com/user-attachments/assets/f8426b27-d2f7-4dee-bfe2-d1644d647747" />
+💡 *This top-level layout ensures electrical symmetry, thermal stability, and process tolerance for a robust and accurate Bandgap Reference circuit.*
+
+## 5 LVS AND POSTLAYOUT STIMULATION
+<img width="1145" height="452" alt="Screenshot 2025-10-31 004007" src="https://github.com/user-attachments/assets/2ef1452c-77cc-42d6-a90c-89f782e5b1d0" />
+<img width="942" height="705" alt="Screenshot 2025-10-31 004154" src="https://github.com/user-attachments/assets/ab5dfb95-d7f3-47c6-8e0f-69409b696b6d" />
+
+
+
+
+
 
 
 
