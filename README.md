@@ -90,7 +90,8 @@ In this project, Ngspice is used to:
 - Simulate the **schematic-level design** of the BGR circuit.  
 - Analyze **DC**, **AC**, and **transient** behavior.  
 - Verify **temperature dependence** and output voltage stability.
-Steps to install Ngspice - Open the terminal and type the following to install Ngspice
+
+-Steps to install Ngspice - Open the terminal and type the following to install Ngspice
 ```bash
 $  sudo apt-get install ngspice
 ```
@@ -104,6 +105,16 @@ Magic is used here to:
 - Extract the layout to generate a **SPICE netlist** for post-layout simulations.
 <img width="274" height="111" alt="Screenshot 2025-10-31 101451" src="https://github.com/user-attachments/assets/a78093f7-4b13-406b-b854-ec6c8117bc11" />
 
+-Steps to install Magic - Open the terminal and type the following to install Magic
+```bash
+$  wget http://opencircuitdesign.com/magic/archive/magic-8.3.32.tgz
+$  tar xvfz magic-8.3.32.tgz
+$  cd magic-8.3.28
+$  ./configure
+$  sudo make
+$  sudo make install
+```
+
 ---
 
 #### 🔗 Netgen — LVS (Layout vs. Schematic)
@@ -113,8 +124,27 @@ A successful LVS ensures that the **layout accurately represents the schematic**
 
 ---<img width="284" height="103" alt="Screenshot 2025-10-31 101535" src="https://github.com/user-attachments/assets/8f03273d-ce0b-4531-81f3-4f387b05238d" />
 
+-Steps to install Netgen - Open the terminal and type the following to insatll Netgen.
+```bash
+$  git clone git://opencircuitdesign.com/netgen
+$  cd netgen
+$  ./configure
+$  sudo make
+$  sudo make install 
+```
 
 In summary, these tools together provide a **complete open-source analog design flow** — from schematic simulation (Ngspice) → layout creation (Magic) → verification (Netgen).
 
+### 1.2 PDK Setup 
 
+The SkyWater **sky130** PDK provides process design data (layers, device rules, models) required for layout, extraction and simulation.  
+Below are typical steps to obtain and prepare the SkyWater-130 PDK on a Linux development environment.
+
+-Create a directory for the PDK
+-Clone the SkyWater PDK repository
+-Initialize submodules (if required)
+-Build or install PDK libraries (optional)
+-Set the PDK path so tools like Magic, Ngspice, and Netgen can locate it easily.
+
+<img width="975" height="356" alt="Screenshot 2025-10-26 225127" src="https://github.com/user-attachments/assets/dd53a7e6-03a4-4d06-88a8-c8bf3c010cd1" />
 
