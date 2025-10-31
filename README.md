@@ -90,7 +90,9 @@ In this project, Ngspice is used to:
 - Analyze **DC**, **AC**, and **transient** behavior.  
 - Verify **temperature dependence** and output voltage stability.
 <img width="289" height="123" alt="Screenshot 2025-10-31 101341" src="https://github.com/user-attachments/assets/f4615124-2ed7-4b6a-b25b-c889e7c5b86f" />
-
+Steps to install Ngspice - Open the terminal and type the following to install Ngspice
+```bash
+sudo apt-get install ngspice
 ---
 
 #### 🧩 Magic — Layout Design and DRC
