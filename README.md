@@ -505,10 +505,47 @@ Resistor implementation: 16 in series and 2 in parallel (2 + 2 + … + 2 + (2‖
 - Final size: L = 1 µm, W = 5 µm, M = 8  
 
 ---
+### 3.3.1 Final Circuit
+<img width="1027" height="647" alt="Screenshot 2025-10-31 144626" src="https://github.com/user-attachments/assets/bcb02bda-5746-41d8-a6f6-3e4952a4ed85" />
 
-📘 **Summary:**  
-The pre-layout circuit design is completed using the SKY130 PDK.  
-The design meets the target specifications for **low power**, **stable voltage reference**, and **temperature independence** while maintaining compatibility with the 130 nm CMOS process.
+### 3.4 Writing Spice netlist and Pre-layout simulation
+
+#### Steps to write a netlist
+
+1. Create a file with `.sp` extension, open with any editor like `gvim` / `vim` / `nano`.
+2. The 1st line of the Spice netlist is by default a comment line.
+3. To write a valid netlist we must include the library file (with absolute path) and mention the corner name (tt, ff or ss).
+
+<img width="712" height="487" alt="Screenshot 2025-10-31 145512" src="https://github.com/user-attachments/assets/f2c4606a-b998-4c49-b491-bb91ff42a173" />
+## 🔍 Netlist Explanation (Sky130 BGR Subcircuit)
+
+### 1️⃣ Global and Temperature Setup
+- `.global vdd gnd` → Declares **VDD** and **GND** as global nodes, accessible throughout the design.  
+- `.temp 27` → Sets the **simulation temperature** to **27°C (room temperature)**.
+
+---
+
+### 2️⃣ Voltage-Controlled Voltage Source (VCVS)
+```spice
+*** vcvs definition
+e1 ra1 qp1 net2 gnd gain=1000
+````
+e1 defines a VCVS (Voltage-Controlled Voltage Source).
+
+Input nodes: qp1 and net2
+
+Output nodes: ra1 and gnd
+
+gain=1000 → Output voltage = 1000 × (V(qp1) - V(net2))
+
+Used for amplification or feedback control in analog reference circuits.
+
+
+<img width="953" height="692" alt="Screenshot 2025-10-31 145732" src="https://github.com/user-attachments/assets/d3cd580a-22dc-4739-8d41-5de36279e459" />
+
+
+
+
 
 
 
